@@ -63,6 +63,14 @@
     font-family: "Varela Round", sans-serif;
     color: #b39656;
   }
+  .singlePostCategorie{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-family: "Varela Round", sans-serif;
+    color: #b39656;
+  }
   
   .singlePostDesc {
     color: #666;
@@ -84,6 +92,16 @@
   }
   
   .singlePostDescInput:focus {
+    outline: none;
+  }
+
+  .singlePostCategorieInput{
+    border: none;
+    color: #666;
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .singlePostCategorieInput:focus {
     outline: none;
   }
   .singlePostButton {

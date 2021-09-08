@@ -15,6 +15,7 @@ import {
 } from "react-router-dom"
 import { useContext } from 'react';
 import { Context } from './context/Context';
+import Contact from './pages/contact/Contact';
 function App() {
   const {user}=useContext(Context);
   return (
@@ -40,6 +41,12 @@ function App() {
   <Route path="/write">
   {
       user ? <Write/> : <Register />
+    }
+        
+          </Route>
+          <Route path="/contact">
+  {
+      user ? <Contact/> : <Register />
     }
         
           </Route>

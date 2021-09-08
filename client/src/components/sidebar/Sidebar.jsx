@@ -7,7 +7,7 @@ function Sidebar() {
     const [cats,setCats] = useState([]);
     useEffect(()=> {
 const getCats = async () => {
-    const res = await axios.get("categories");
+    const res = await axios.get("/categories/");
     setCats(res.data);
 }
 getCats()
@@ -17,12 +17,13 @@ getCats()
             <div className="sidebarItem">
             <span className="sidebarTitle">ABOUT ME</span>
         <img
-          src="https://themegoods-cdn-pzbycso8wng.stackpathdns.com/grandblog/demo/wp-content/uploads/2015/11/aboutme.jpg"
+         className="sidebarImg"
+          src="https://aymenouer.github.io/portfolio/assets/img/profile-img.jpg"
           alt=""
         />
         <p>
-          Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
-          amet ex esse.Sunt eu ut nostrud id quis proident.
+          My Name is Aymen Ouerghui . i am software engineer student . Passionate about 
+new technologies, learning and development of myself and of others around me.
         </p>
             </div>
             <div className="sidebarItem">
@@ -38,12 +39,13 @@ getCats()
 
             </div>
             <div className="sidebarItem">
-            <span className="sidebarTitle">FOLLOW US</span>
+            <span className="sidebarTitle">FOLLOW ME</span>
             <div className="sidebarSocial">
-                    <i className="sidebarIcon fab fa-facebook-square" ></i>
-                    <i className="sidebarIcon fab fa-twitter-square" ></i>
-                    <i className="sidebarIcon fab fa-instagram-square" ></i>
-                    <i className="sidebarIcon fab fa-pinterest-square" ></i>
+            <a  href="mailto:aymenouerghui0@gmail.com"  >     <i className="sidebarIcon fas fa-envelope-square" ></i></a>
+           <a  href="https://github.com/aymenouer">     <i className="sidebarIcon fab fa-github-square" ></i></a>
+           <a  href="https://www.linkedin.com/in/aymen-ouerghi-249632146/">     <i className="sidebarIcon fab fa-linkedin" ></i></a>
+           <a  href="https://aymenouer.github.io/portfolio">     <i className="sidebarIcon fab fa-pinterest-square" ></i></a>
+
             </div>
 
             </div>

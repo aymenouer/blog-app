@@ -13,17 +13,20 @@ const handlelogout = () =>{
     return (
             <div className="top" >
                 <div className="topLeft">
-                    <i className="topIcon fab fa-facebook-square" ></i>
-                    <i className="topIcon fab fa-twitter-square" ></i>
-                    <i className="topIcon fab fa-instagram-square" ></i>
-                    <i className="topIcon fab fa-pinterest-square" ></i>
+             
+           <a  href="mailto:aymenouerghui0@gmail.com">     <i className="topIcon fas fa-envelope-square" ></i></a>
+           <a  href="https://github.com/aymenouer">     <i className="topIcon fab fa-github-square" ></i></a>
+           <a  href="https://www.linkedin.com/in/aymen-ouerghi-249632146/">     <i className="topIcon fab fa-linkedin" ></i></a>
+           <a  href="https://aymenouer.github.io/portfolio">     <i className="topIcon fab fa-pinterest-square" ></i></a>
+                
+               
                 </div>
                 <div className="topCenter">
                     <ul className="topList">
                         <li className="topListItem"><Link to="/" className="link" >HOME</Link></li>
-                        <li className="topListItem"><Link to="/" className="link" >ABOUT</Link></li>
-                        <li className="topListItem"><Link to="/" className="link" >CONTACT</Link></li>
+                  
                         <li className="topListItem"><Link to="/write" className="link" >WRITE</Link></li>
+                        <li className="topListItem"><Link to="/contact" className="link" >CONTACT</Link></li>
                         <li className="topListItem" onClick={handlelogout} >
                             {user &&"LOGOUT"}
                             </li>
@@ -33,12 +36,15 @@ const handlelogout = () =>{
                 
                     {
                         user ? (
+                            <>
                             <Link to="/settings" >
                             <img 
                     className="topImg"
                     src={PF+user.profilePic}
                     />
                     </Link>
+                    <span style={{marginLeft:'10px'}} >{user.username}</span>
+                    </>
                         ) : (
                             <ul className="topList" >
                                       <li className="topListItem"> <Link to="/login" className="link" >LOGIN</Link></li>
@@ -47,7 +53,7 @@ const handlelogout = () =>{
                             </li>
                         </ul>
                         )}
-                    <i className="topSearchIcon fas fa-search" ></i>
+              
                 </div>
             
         </div>

@@ -17,7 +17,9 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
+   
+    if (post.user.toString() === req.body.user.toString()) {
+  
       try {
         const updatedPost = await Post.findByIdAndUpdate(
           req.params.id,
@@ -42,7 +44,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
+    if (post.user.toString() === req.body.user.toString()){
       try {
         await post.delete();
         res.status(200).json("Post has been deleted...");
@@ -60,7 +62,7 @@ router.delete("/:id", async (req, res) => {
 //GET POST
 router.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate({ path: 'user', select: 'username' });
     res.status(200).json(post);
   } catch (err) {
     res.status(500).json(err);
@@ -74,16 +76,18 @@ router.get("/", async (req, res) => {
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username });
+
+       const user = await User.find({ username });
+      posts = await Post.find({ user });
     } else if (catName) {
       posts = await Post.find({
-        categories: {
-          $in: [catName],
-        },
+        categorie: catName
       });
     } else {
-      posts = await Post.find();
+      posts = await Post.find().populate({ path: 'user', select: 'username' });
+
     }
+
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);

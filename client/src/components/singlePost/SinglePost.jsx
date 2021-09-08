@@ -12,23 +12,34 @@ export default function SinglePost() {
   const PF = "http://localhost:5000/images/";
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
+  const [User_post, setUser_post] = useState("");
+  const [categorie, setCategorie] = useState("");
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
-
+  const [cats,setCats] = useState([]);
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/posts/" + path);
+     
       setPost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
+      setUser_post(res.data.user);
+      setCategorie(res.data.categorie);
+
     };
+  const getCats = async () => {
+      const res = await axios.get("/categories/");
+      setCats(res.data);
+  };
+  getCats();
     getPost();
   }, [path]);
 
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${post._id}`, {
-        data: { username: user.username },
+        data: { user: user._id },
       });
       window.location.replace("/");
     } catch (err) {}
@@ -37,9 +48,10 @@ export default function SinglePost() {
   const handleUpdate = async () => {
     try {
       await axios.put(`/posts/${post._id}`, {
-        username: user.username,
+        user: user._id,
         title,
         desc,
+        categorie
       });
       setUpdateMode(false)
     } catch (err) {}
@@ -62,7 +74,8 @@ export default function SinglePost() {
         ) : (
           <h1 className="singlePostTitle">
             {title}
-            {post.username === user?.username && (
+          
+            {User_post._id === user?._id && (
               <div className="singlePostEdit">
                 <i
                   className="singlePostIcon far fa-edit"
@@ -79,8 +92,10 @@ export default function SinglePost() {
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
             Author:
-            <Link to={`/?user=${post.username}`} className="link">
-              <b> {post.username}</b>
+            <Link to={`/?user=${User_post.username}`} className="link">
+              <b> {
+               User_post.username
+             }</b>
             </Link>
           </span>
           <span className="singlePostDate">
@@ -95,6 +110,24 @@ export default function SinglePost() {
           />
         ) : (
           <p className="singlePostDesc">{desc}</p>
+        )}
+         {updateMode ? (
+
+<select className="singlePostCategorieInput" value={categorie} onChange={e => setCategorie(e.target.value)}>
+
+
+{cats.map(c => (
+                 <option key={c._id} value={c.name}>{c.name}</option>
+                ))}
+
+</select>
+  
+        ) : (
+          
+          <span className="singlePostCategorie">
+            Categorie : {categorie}
+            
+          </span>
         )}
         {updateMode && (
           <button className="singlePostButton" onClick={handleUpdate}>

@@ -15,12 +15,13 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    username: {
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true
+  },
+    categorie: {
       type: String,
-      required: true,
-    },
-    categories: {
-      type: Array,
       required: false,
     },
   },

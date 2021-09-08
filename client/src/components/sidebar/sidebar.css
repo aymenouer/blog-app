@@ -9,6 +9,10 @@
     align-items: center;
 
 }
+.sidebarImg{
+    width: 250px;
+    height: 250px;
+}
 .sidebarItem{
     display: flex;
     flex-direction: column;
